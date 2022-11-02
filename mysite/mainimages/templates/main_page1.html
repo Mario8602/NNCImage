@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block page_content %}
+
+<!--<head>-->
+<!--    <link rel="stylesheet" href="{% static 'css/style.css' %}">-->
+<!--</head>-->
+
+<!--<head>-->
+<!--    <style>-->
+<!--        .grid-item {-->
+<!--            margin-bottom: 10px;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+
+<div class="grid">
+    {% for item in post %}
+    {% if item.photo %}
+    <div class="grid-item" href="#">
+        <a href="{{ item.get_absolute_url }}"><img src="{{ item.photo.url }}" width="300" alt="image"></a>
+    </div>
+    {% else %}
+    <h1>NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</h1>
+    {% endif %}
+    {% endfor %}
+</div>
+
+
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js"></script>
+<script>
+    var elem = document.querySelector('.grid');
+    var msnry = new Masonry( elem, {
+        itemSelector: '.grid-item',
+        gutter: 10,
+    });
+
+    let elem2 = document.querySelector('.grid');
+    let infScroll = new InfiniteScroll( elem2, {
+        path: '.pagination__next',
+        append: '.grid-item',
+        outlayer: msnry
+<!--        history: false,-->
+    });
+</script>
+
+
+{% endblock %}

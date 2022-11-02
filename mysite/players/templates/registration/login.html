@@ -1,0 +1,52 @@
+{% extends 'base1.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<!--<h2>Вход</h2>-->
+<!--<form method="post">-->
+<!--    {% csrf_token %}-->
+<!--    {{ form.as_p }}-->
+<!--    <button type="submit">Login</button>-->
+<!--</form>-->
+
+<!--<body class="login-bg" style="height: 100vh;">-->
+<!--<div class="modal-content ps-5 pb-5 pe-5">-->
+<!--    <h3 class="mt-4 mb-3" align="center"><b>Вход</b></h3>-->
+<!--    <div class="row">-->
+<!--        <form method="post">-->
+<!--            {% csrf_token %}-->
+<!--            <div class="">-->
+<!--                {{ form.username }}-->
+<!--            </div>-->
+<!--            <div class="mt-2">-->
+<!--                {{ form.password }}-->
+<!--            </div>-->
+<!--            <input class="modal-red-btn btn text-white mt-3 w-100" type="submit" value="Login">-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</body>-->
+
+<body class="login-bg" style="height: 100vh;">
+<div class="modal-content ps-5 pb-5 pe-5">
+    <h3 class="mt-4 mb-3"><b>Login</b></h3>
+    <div class="row">
+        <form method="post">
+            {% csrf_token %}
+            <div class="">
+                {{ form.username }}
+            </div>
+            <div class="mt-2">
+                {{ form.password }}
+            </div>
+            <input class="modal-red-btn btn text-white mt-3 w-100" type="submit" value="Login">
+        </form>
+        <small class="text-muted mt-3">
+            New Here? <a class="text-decoration-none" href="{% url 'signup' %}">Create account</a>
+        </small>
+    </div>
+</div>
+</body>
+
+{% endblock %}

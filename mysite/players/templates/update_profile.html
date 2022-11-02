@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block page_content %}
+
+
+<div class="col-3"></div>
+<div class="col-xl-6 pt-2 row pin-detail-container">
+    <h2 class="text-black"><b>Удаление постов</b></h2>
+    <form method="post" enctype="multipart/form-data">
+        <div class="row">
+            {% csrf_token %}
+            <div class="col-md-4 mt-4">
+                {{ form.first_name }}
+            </div>
+            <div class="col-md-6 mt-4">
+                {{ form.last_name }}
+            </div>
+        </div>
+        <div class="col-md-6 mt-4">
+            {{ form.about }}
+        </div>
+        <div class="col-md-6 mt-4">
+            {{ form.date_of_birth }}
+        </div>
+        <div class="col-md-6 mt-4">
+            {{ form.website }}
+        </div>
+        <!--            {% csrf_token %}-->
+        <!--            <div class="col-2">-->
+        <!--                Имя<br>-->
+        <!--                {{ form.first_name }}-->
+        <!--            </div>-->
+        <!--            <div class="col-2">-->
+        <!--                Фамилия<br>-->
+        <!--                {{ form.last_name }}-->
+        <!--            </div>-->
+
+
+        <!--        <input type="text" placeholder="наме" class="form-control"><br>-->
+        <!--        <input type="text" placeholder="фаме" class="form-control"><br>-->
+        <!--        <textarea class="form-control" placeholder="Tehxt"></textarea>-->
+        <!--        <input type="date" class="form-control"><br>-->
+        <!--        <input type="time" class="form-control"><br>-->
+
+        <!--        <button class='modal-red-btn btn text-white mt-3 mb-3 w-100' type="submit">Delete it</button>-->
+        <button class='modal-red-btn btn text-white mt-3 mb-3 w-100' type="submit">Probably</button>
+    </form>
+</div>
+
+
+{% endblock %}

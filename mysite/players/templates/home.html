@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block page_content %}
+<div class="col-3"></div>
+<div class="col-md-6 pt-2 row pin-detail-container">
+    <div class="row">
+        <div class="col-md-2 pt-4 me-5 pb-5">
+            <p class="text-black"><b>NNCImage</b></p>
+            <p class="text-black"><b>NNCImage</b></p>
+        </div>
+        <div class="col-md-8 ps-5 pe-5 pt-3 pb-5">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h2 class="text-black"><b>NNCImage</b></h2>
+                <p class="mb-4">На сайте представлены изображения архитектуры, созданные искуственным интелектом на
+                    основе ваших запросов. Вы можете загрузить свои материалы на сайт если пройдёте авторизацию.
+                    Vestibulum ultrices finibus ante, vel cursus ligula sollicitudin quis. Pellentesque habitant morbi
+                    tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus vitae purus vitae enim
+                    dignissim aliquam. Fusce euismod urna ac ex mattis convallis. Integer at condimentum diam. Fusce
+                    ultricies vestibulum consectetur. Nullam lectus libero, lacinia a dictum eget, tristique eu libero.
+                    Proin vitae nibh enim. Aliquam nec sagittis ipsum, id imperdiet enim. Aenean nisl massa, auctor ac
+                    nisl ac, vehicula blandit turpis. Phasellus dapibus consectetur velit quis tincidunt. Nam efficitur
+                    erat id nisl maximus eleifend. Praesent porttitor vel tellus ac accumsan. Donec quis arcu id arcu
+                    tempus volutpat.</p>
+                <div class="row mt-5">
+                    <p><b>Tel.</b> +79999999999999</p>
+                    <p><b>Web.</b> helphelphelp@mail.com</p>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+
+{% endblock %}

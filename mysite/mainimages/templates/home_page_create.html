@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block page_content %}
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5" style="text-align: center;"></div>
+        <div class="col-md-2">
+            <a><IMG class="displayed" src="{{ user.profileuser.photo.url }}" height="200"></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5"></div>
+        <div class="col-md-2">
+            <div class="mokson" style="text-align: center;">{{ user.profileuser.first_name }} {{ user.profileuser.last_name }}</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5"></div>
+        <div class="col-md-2">
+            <div class="mokson1" style="text-align: center;">@{{ user.username}}</div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-4 offset-md-11"><a href="{% url 'home_page' %}" class="ms-1 nav-link px-2 link-dark">add new group</a></div>
+        {% for item in group %}
+        <div class="col-md-2">
+            <a href="{{ item.get_absolute_url }}"><img src="{{ item.cover.url }}"></a>
+            <div class="mokson2 mt-2">
+                <p><b>{{ item.title }}</b></p>
+                <p>{{ item.posta.count }} фотографий</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!--<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>-->
+<!--<script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js"></script>-->
+<!--<script>-->
+<!--    var elem = document.querySelector('.grid');-->
+<!--    var msnry = new Masonry( elem, {-->
+<!--        itemSelector: '.grid-item',-->
+<!--        gutter: 10,-->
+<!--    });-->
+
+<!--    let elem2 = document.querySelector('.grid');-->
+<!--    let infScroll = new InfiniteScroll( elem2, {-->
+<!--        path: '.pagination__next',-->
+<!--        append: '.grid-item',-->
+<!--        outlayer: msnry-->
+<!--&lt;!&ndash;        history: false,&ndash;&gt;-->
+<!--    });-->
+
+<!--</script>-->
+
+
+{% endblock %}

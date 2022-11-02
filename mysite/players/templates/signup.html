@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+<!--{% block title %}Sign Up{% endblock %}-->
+
+{% block page_content %}
+<!--<div class="col-5"></div>-->
+<!--<div class="col-md-2 pt-3 pb-4 p-2 row pr-10 reg-form">-->
+<!--    <h2 class="reg-title"> Добро пожаловать</h2>-->
+<!--    <h2 class="reg-title"> в NNCImage</h2>-->
+<!--    <form method="post">-->
+<!--        {% csrf_token %}-->
+<!--        {{ form.as_p }}-->
+<!--        <button type="submit">Sign up</button>-->
+<!--    </form>-->
+<!--</div>-->
+
+<body class="login-bg" style="height: 100vh;">
+<div class="modal-content ps-5 pb-5 pe-5">
+    <h3 class="mt-4 mb-3" align="center"><b>Добро пожаловать в</b></h3>
+    <h3 class="mb-4" align="center"><b>NNCImage</b></h3>
+    <div class="row">
+        <form method="post">
+            {% csrf_token %}
+            <div class="">
+                {{ form.email }}
+            </div>
+            <div class="mt-2">
+                {{ form.username }}
+            </div>
+            <div class="mt-2">
+                {{ form.phone }}
+            </div>
+            <div class="mt-2">
+                {{ form.password1 }}
+            </div>
+            <div class="mt-2">
+                {{ form.password2 }}
+            </div>
+            <input class="modal-red-btn btn text-white mt-3 w-100" type="submit" value="Submit">
+        </form>
+        <small class="text-muted mt-3">
+            Already have a account? <a class="text-decoration-none" href="{% url 'home' %}">Login Here</a>
+        </small>
+    </div>
+</div>
+</body>
+
+
+{% endblock %}
