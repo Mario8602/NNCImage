@@ -129,9 +129,61 @@ class ProfileUpdateForm(forms.ModelForm):
         'class': 'form-control1',
         'rows': 1,
     }))
+    photo = forms.ImageField(widget=forms.FileInput(attrs={
+        'name': 'attached_file',
+        'class': 'form-control mb-3',
+    }))
+
     website = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control2', 'rows': 1}))
     date_of_birth = forms.DateField(widget=forms.DateInput(attrs={'class': 'form-control2', 'rows': 1}))
     about = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control2', 'rows': 5}))
+
+    class Meta:
+        model = ProfileUser
+        fields = ['first_name', 'last_name', 'photo', 'website', 'date_of_birth', 'about']
+
+
+class ProfileCreateForm(forms.ModelForm):
+
+    photo = forms.ImageField(widget=forms.FileInput(attrs={
+        'name': 'attached_file',
+        'class': 'form-control',
+        'placeholder': 'Фото',
+
+    }))
+
+    first_name = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'rows': 1,
+        'title': 'Your name',
+        'placeholder': 'Введите имя',
+    }))
+
+    last_name = forms.CharField(widget=forms.TextInput(attrs={
+        'title': 'Фамилия',
+        'class': 'form-control',
+        'rows': 1,
+        'placeholder': 'Введите фамилию',
+    }))
+
+    website = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'rows': 1,
+        'placeholder': 'Введите ссылку',
+    }))
+
+    date_of_birth = forms.DateField(widget=forms.DateInput(attrs={
+        'class': 'form-control',
+        'rows': 1,
+        'placeholder': 'Введите дату рождения',
+    }))
+
+    about = forms.CharField(widget=forms.Textarea(attrs={
+        'class': 'form-control',
+        'rows': 5,
+        'placeholder': 'Введите информацию о себе'
+    }))
+
 
     class Meta:
         model = ProfileUser

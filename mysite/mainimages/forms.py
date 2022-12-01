@@ -93,23 +93,25 @@ class CreatePostForm(forms.ModelForm):
         fields = ['photo', 'title', 'body', 'categorys']
 
 
-class CreateGroupForm(forms.ModelForm):
-
-    class Meta:
-        model = GroupsPosts
-        fields = ['title', 'cover', 'posta', 'body', 'is_private']
-
 # class CreateGroupForm(forms.ModelForm):
 #
 #     class Meta:
 #         model = GroupsPosts
-#         fields = ['title', 'is_private']
-#
-#     def __init__(self, *args, **kwargs):
-#         super(CreateGroupForm, self).__init__(*args, **kwargs)
-#         self.fields['title'].widget.attrs['placeholder'] = 'Like "Places to Go" or "Recipes to Make"'
-#         for visible in self.visible_fields():
-#             if visible.name == 'title':
-#                 visible.field.widget.attrs['class'] = 'form-control border rounded-pill p-2 mt-1'
-#             else:
-#                 visible.field.widget.attrs['class'] = 'form-check-input mt-1 private-checkbox'
+#         fields = ['title', 'cover', 'posta', 'body', 'is_private']
+
+class CreateGroupForm(forms.ModelForm):
+
+    class Meta:
+        model = GroupsPosts
+        fields = ['title', 'is_private', 'cover', 'posta', 'body']
+
+    def __init__(self, *args, **kwargs):
+        super(CreateGroupForm, self).__init__(*args, **kwargs)
+        self.fields['title'].widget.attrs['placeholder'] = 'Like "Places to Go" or "Recipes to Make"'
+        self.fields['body'].widget.attrs['class'] = 'md-textarea form-control'
+        self.fields['posta'].widget.attrs['class'] = 'md-textarea form-control'
+        for visible in self.visible_fields():
+            if visible.name == 'title':
+                visible.field.widget.attrs['class'] = 'form-control border rounded-pill p-2 mt-1'
+            # else:
+            #     visible.field.widget.attrs['class'] = 'form-check-input mt-1 private-checkbox'

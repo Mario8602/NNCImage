@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_content %}
+
+
+<div class="row"></div>
+<div class="grid">
+    {% for item in my_post %}
+    <div class="grid-item" href="#">
+        <img src="{{ item.photo.url }}" width='300' alt="image">
+    </div>
+    {% endfor %}
+</div>
+
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js"></script>
+<script>
+    var elem = document.querySelector('.grid');
+    var msnry = new Masonry( elem, {
+        itemSelector: '.grid-item',
+        gutter: 10,
+    });
+
+    let elem2 = document.querySelector('.grid');
+    let infScroll = new InfiniteScroll( elem2, {
+        path: '.pagination__next',
+        append: '.grid-item',
+        outlayer: msnry
+<!--        history: false,-->
+    });
+</script>
+
+{% endblock %}

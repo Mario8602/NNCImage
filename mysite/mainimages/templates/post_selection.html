@@ -20,8 +20,6 @@
    .colortext {
    color: <div id="808080"></div>;
    }
-
-
     </style>
 </head>
 
@@ -56,7 +54,9 @@
                 <div class="col-md-1">
                     <button type="submit" class="save-btn text-black"><b>Save</b></button>
                 </div>
+                {% if user.is_authenticated %}
                 <a class="btn btn-outline-danger" href="{% url 'post_delete' post_one.id %}">Delete It</a>
+                {% endif %}
             </div>
         </form>
 
@@ -100,7 +100,7 @@
             <div class="mt-3"></div>
             {% for comment in comments %}
             <div class="comment mt-4">
-                <img src="{{ comment.user.profileuser.photo.url }}" width="40px" alt="image">
+                <img src="{{ comment.user.profileuser.photo.url }}" class="rounded-circle" width="35px" height="35px" alt="image">
                 <b>{{ comment.user }}</b>:<i>{{ comment.body|linebreaks }}</i>
                 <div class="info mt-1" style=""><small><span class="colortext">
                     {{ comment.created_on }}

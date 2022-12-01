@@ -44,7 +44,7 @@ class ProfileUser(models.Model):
     user = models.OneToOneField(CustomUser, null=True, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    photo = models.ImageField(default='profiles/default.png', upload_to='profiles/')
+    photo = models.ImageField(default='mysite/media/profiles/default.png', upload_to='profiles/')
     website = models.CharField(max_length=100)
     date_of_birth = models.DateField(blank=True, null=True)
     about = models.TextField(blank=True, null=True)

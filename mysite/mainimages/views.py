@@ -76,9 +76,7 @@ def post_selection(request, pk):
     posts = Post.objects.filter(user_id=1).count
 
     post_one = get_object_or_404(Post, pk=pk)
-
     comments = post_one.comment1.order_by('-created_date')
-
     comment_form = CommentForm()
     user = request.user
 
@@ -223,6 +221,16 @@ def home_page(request):
 
 
 @login_required
+def my_posts(request):
+    """ Показывает пользователю загруженные им посты """
+    my_post = Post.objects.filter(user=request.user)
+    context = {
+        'my_post': my_post,
+    }
+    return render(request, "my_posts.html", context)
+
+
+@login_required
 def home_page_create(request):
     group = GroupsPosts.objects.filter(user=request.user)
 
@@ -234,11 +242,9 @@ def home_page_create(request):
 
 
 def open_group(request, title):
-
     # postes = GroupsPosts.objects.filter(user=request.user)
     # postes = GroupsPosts.objects.filter()
     postes = get_object_or_404(GroupsPosts, title=title)
-
     context = {
         'posts': postes,
     }

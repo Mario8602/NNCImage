@@ -7,24 +7,36 @@
 
 <div class="col-3"></div>
 <div class="col-xl-6 pt-2 row pin-detail-container">
-    <h2 class="text-black"><b>Удаление постов</b></h2>
+    <h2 class="text-black" style="text-align: center;"><b>Редактировать профиль</b></h2>
     <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>Фотография</p>
+        <img src="{{ user.profileuser.photo.url }}" style="object-fit: cover;" width='80' height="80" class="rounded-circle">
+        <div class="col-md-8 mt-4">
+            {{ form.photo }}
+        </div>
+
         <div class="row">
-            {% csrf_token %}
-            <div class="col-md-4 mt-4">
+            <div class="col-md-2 mt-4">
+                Имя
                 {{ form.first_name }}
             </div>
-            <div class="col-md-6 mt-4">
+            <div class="shirota col-md-4 mt-4">
+                Фамилия
                 {{ form.last_name }}
             </div>
         </div>
+
         <div class="col-md-6 mt-4">
+            О себе
             {{ form.about }}
         </div>
         <div class="col-md-6 mt-4">
+            Дата рождения
             {{ form.date_of_birth }}
         </div>
         <div class="col-md-6 mt-4">
+            Веб-сайт
             {{ form.website }}
         </div>
         <!--            {% csrf_token %}-->
@@ -45,7 +57,7 @@
         <!--        <input type="time" class="form-control"><br>-->
 
         <!--        <button class='modal-red-btn btn text-white mt-3 mb-3 w-100' type="submit">Delete it</button>-->
-        <button class='modal-red-btn btn text-white mt-3 mb-3 w-100' type="submit">Probably</button>
+        <button class="modal-red-btn btn text-white mt-3 mb-3" type="submit">Изменить</button>
     </form>
 </div>
 

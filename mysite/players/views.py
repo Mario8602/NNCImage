@@ -8,9 +8,9 @@ from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, FormView, UpdateView
 
-from .forms import CustomUserCreationForm, UserLoginForm, UpdateUserForm, UpdateProfileForm, ProfileUpdateForm
+from .forms import CustomUserCreationForm, UserLoginForm, UpdateUserForm, UpdateProfileForm, ProfileUpdateForm, ProfileCreateForm
 from .models import CustomUser, ProfileUser
-from mainimages.models import Post
+# from mainimages.models import Post
 
 from django.contrib.auth.decorators import login_required
 
@@ -98,7 +98,8 @@ class CreateProfilePageView(CreateView):
     model = ProfileUser
 
     template_name = 'create_profile.html'
-    fields = ['first_name', 'last_name', 'photo', 'website', 'date_of_birth', 'about']
+    form_class = ProfileCreateForm
+    # fields = ['first_name', 'last_name', 'photo', 'website', 'date_of_birth', 'about']
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -133,8 +134,9 @@ class ProfileUpdateView(UpdateView):
 
     model = ProfileUser
     template_name = 'update_profile.html'
-    success_url = '/'
-
     form_class = ProfileUpdateForm
 
     # fields = ['first_name', 'last_name', 'photo', 'website', 'date_of_birth', 'about']
+
+    def get_success_url(self):
+        return reverse_lazy('user_profile', kwargs={'pk': self.object.pk})

@@ -17,8 +17,6 @@ class GroupsPostsAdmin(admin.ModelAdmin):
     search_fields = ('title',)
 
 
-
-
 # class CommentAdmin(admin.ModelAdmin):
 #     list_display = ['post', 'user', 'body', 'created_date']
 #     search_fields = ('author', 'post')

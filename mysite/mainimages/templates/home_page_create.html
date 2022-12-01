@@ -1,22 +1,24 @@
 {% extends "base.html" %}
-
 {% load static %}
-
 {% block page_content %}
-
 
 
 <div class="container">
     <div class="row">
         <div class="col-md-5" style="text-align: center;"></div>
         <div class="col-md-2">
-            <a><IMG class="displayed" src="{{ user.profileuser.photo.url }}" height="200"></a>
+            {% if user.profileuser %}
+            <a><img class="displayed profilephoto" src="{{ user.profileuser.photo.url }}" height="200"></a>
+            {% else %}
+            <a><img class="displayed profilephoto" src="https://picsum.photos/300?grayscale" height="200"></a>
+            {% endif %}
         </div>
     </div>
     <div class="row">
         <div class="col-md-5"></div>
         <div class="col-md-2">
-            <div class="mokson" style="text-align: center;">{{ user.profileuser.first_name }} {{ user.profileuser.last_name }}</div>
+            <div class="mokson" style="text-align: center;">{{ user.profileuser.first_name }} {{ user.profileuser.last_name }}
+            </div>
         </div>
     </div>
     <div class="row">
@@ -27,10 +29,19 @@
     </div>
     <hr>
     <div class="row">
-        <div class="col-md-4 offset-md-11"><a href="{% url 'home_page' %}" class="ms-1 nav-link px-2 link-dark">add new group</a></div>
+        <div class="col-md-4 offset-md-11"><a href="{% url 'home_page' %}" class="ms-1 nav-link px-2 link-dark">add new
+            group</a></div>
+
+        <div class="col-md-2">
+            <a href="{% url 'my_posts' %}"><img src="https://picsum.photos/300?grayscale" class="img-fluid"></a>
+            <div class="mokson2 mt-2">
+                <p><b>Your posts</b></p>
+                <p>{{ item.posta.count }} фотографий</p>
+            </div>
+        </div>
         {% for item in group %}
         <div class="col-md-2">
-            <a href="{{ item.get_absolute_url }}"><img src="{{ item.cover.url }}"></a>
+            <a href="{{ item.get_absolute_url }}"><img src="{{ item.cover.url }}" width="300"></a>
             <div class="mokson2 mt-2">
                 <p><b>{{ item.title }}</b></p>
                 <p>{{ item.posta.count }} фотографий</p>

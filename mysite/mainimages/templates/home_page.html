@@ -8,7 +8,12 @@
 
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
+<!--    {{ form.as_p }}-->
+    {{ form.title }}
+    {{ form.cover }}
+    {{ form.is_private }}
+    {{ form.posta }}
+    {{ form.body }}
     <button class='modal-red-btn btn text-white mt-3 mb-3 w-100' type="submit">Upload</button>
 </form>
 
