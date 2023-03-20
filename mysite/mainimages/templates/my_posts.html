@@ -7,7 +7,7 @@
 <div class="grid">
     {% for item in my_post %}
     <div class="grid-item" href="#">
-        <img src="{{ item.photo.url }}" width='300' alt="image">
+        <a href="{{ item.get_absolute_url }}"><img src="{{ item.photo.url }}" width='300' alt="image"></a>
     </div>
     {% endfor %}
 </div>

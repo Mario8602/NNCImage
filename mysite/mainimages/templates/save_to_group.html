@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_content %}
+
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <button class=" modal-red-btn btn text-white mt-3 mb-3" type="submit">Создать</button>
+</form>
+lol
+<a>{{ post_one.title }}</a>
+{{ groups }}
+
+
+{% endblock %}

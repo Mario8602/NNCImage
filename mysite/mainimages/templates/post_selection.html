@@ -48,15 +48,20 @@
                         <li><a id="editPinBtn" class="dropdown-item" href="#">Edit pin</a></li>
                         {% endif %}
                         <li><a class="dropdown-item" href="{{ post_one.photo.url }}" download>Download image</a></li>
+                        {% for i in group %}
+                        <li><a class="dropdown-item" href="{{ post_one.photo.url }}">{{ i.title }}</a></li>
+                        {% endfor %}
                     </ul>
                 </div>
                 <div class="col-md-4">{{ save_to_board_form.board }}</div>
-                <div class="col-md-1">
-                    <button type="submit" class="save-btn text-black"><b>Save</b></button>
-                </div>
                 {% if user.is_authenticated %}
-                <a class="btn btn-outline-danger" href="{% url 'post_delete' post_one.id %}">Delete It</a>
+                <div class="col-md-1">
+                    <a class="save-btn link-dark rougi" href="{% url 'post_delete' post_one.id %}">Delete</a>
+<!--                    <button type="submit" class="save-btn text-black"><b>Save</b></button>-->
+                </div>
                 {% endif %}
+
+
             </div>
         </form>
 
@@ -79,8 +84,8 @@
                 {% if is_following %}
                 <a href="#" class="following-btn btn text-white"><b>Following</b></a>
                 {% else %}
-                <a href="#"
-                   class="main-btn btn text-black"><b>Follow</b></a>
+                <a href="{% url 'save_to_group' post_one.id %}"
+                   class="main-btn btn text-black"><b>Save</b></a>
                 {% endif %}
             </div>
             {% endif %}
@@ -104,7 +109,6 @@
                 <b>{{ comment.user }}</b>:<i>{{ comment.body|linebreaks }}</i>
                 <div class="info mt-1" style=""><small><span class="colortext">
                     {{ comment.created_on }}
-                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                     Likes </span></small>
 
                     <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="10.000000pt" height="10.000000pt"

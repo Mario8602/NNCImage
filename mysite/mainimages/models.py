@@ -8,6 +8,7 @@ from players.models import CustomUser
 
 
 class Post(models.Model):
+    """ Посты в определённой категории, публикуемые на сайте """
     title = models.CharField(max_length=100, verbose_name='Наименование')
     body = models.TextField(max_length=200, blank=True, verbose_name='Контент')
     photo = models.ImageField(upload_to='photos/%Y/%m/%d', verbose_name='Фото')
@@ -22,8 +23,12 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('post_selection', kwargs={'pk': self.pk})
 
+    def get_absolute_url1(self):
+        return reverse('post_selection', kwargs={'pk': self.pk})
+
 
 class Category(models.Model):
+    """ Категории постов """
     categories = models.CharField(max_length=20, db_index=True, verbose_name='Категории')
 
     def __str__(self):
@@ -31,6 +36,7 @@ class Category(models.Model):
 
 
 class Comment(models.Model):
+    """ Комментарии под постами """
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comment1')
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, blank=True, null=True)
     body = models.TextField(max_length=300, verbose_name='Контент')
@@ -41,6 +47,7 @@ class Comment(models.Model):
 
 
 class GroupsPosts(models.Model):
+
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='group_user')
     posta = models.ManyToManyField(Post, related_name='posta', blank=True)
     title = models.CharField(max_length=300)
@@ -49,7 +56,7 @@ class GroupsPosts(models.Model):
     is_private = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"{self.title}"
+        return f"{self.title} {self.user}"
 
     def get_absolute_url(self):
         return reverse('open_group', kwargs={'title': self.title})

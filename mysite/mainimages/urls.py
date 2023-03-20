@@ -7,6 +7,7 @@ from .views import PostDeleteView
 urlpatterns = [
     path('', views.posts, name='postes'),
     path('<int:pk>/', views.post_selection, name='post_selection'),
+    path('<int:pk>/save/', views.save_post_to_group, name='save_to_group'),
     # path('<int:id>/delete-post', views.delete_post, name='delete_po st'),
     path('create_post/', views.create_post, name='create_post_one'),
     path('home_page/', views.home_page, name='home_page'),

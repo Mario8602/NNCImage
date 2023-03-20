@@ -3,7 +3,7 @@ from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import DeleteView
 
-from .forms import CommentForm, CreatePostForm, CreateGroupForm
+from .forms import CommentForm, CreatePostForm, CreateGroupForm, SaveToGroupForm
 from .models import Post, Comment, GroupsPosts
 from players.models import CustomUser
 
@@ -74,11 +74,12 @@ def posts(request):
 # получение и вывод конкретного поста по pk, форма комментариев с возможностью добавления
 def post_selection(request, pk):
     posts = Post.objects.filter(user_id=1).count
-
     post_one = get_object_or_404(Post, pk=pk)
     comments = post_one.comment1.order_by('-created_date')
     comment_form = CommentForm()
     user = request.user
+
+    group = GroupsPosts.objects.filter(user=request.user).order_by('-id')
 
     if request.method == 'POST':
         comment_form = CommentForm(data=request.POST)
@@ -95,10 +96,51 @@ def post_selection(request, pk):
         'post_one': post_one,
         'comments': comments,
         'comment_form': comment_form,
-        'posts': posts
+        'posts': posts,
+        'group': group,
     }
 
     return render(request, "post_selection.html", context)
+
+
+def save_post_to_group(request, pk):
+    post_one = get_object_or_404(Post, pk=pk)
+    groups = GroupsPosts.objects.filter(user=request.user)[1]
+    user = request.user
+
+    if request.method == "POST":
+        form = SaveToGroupForm(data=request.POST)
+        if form.is_valid():
+            form_new = form.save(commit=False)
+            form_new.user = user
+            form_new.groupposts = groups
+            form_new.save()
+    else:
+        form = SaveToGroupForm()
+
+    context = {
+        'post_one': post_one,
+        'groups': groups,
+        'form': form
+    }
+    return render(request, "save_to_group.html", context)
+
+
+# @login_required
+# def save_to_group(request, pk):
+#     post_one = get_object_or_404(Post, pk=pk)
+#     user = request.user
+#
+#     if request.method == 'POST':
+#         form = SaveToGroupForm(request.user, request.POST, instance=post_one)
+#         if form.is_valid():
+#             instance = form.save(commit=False)
+#             instance.user = pin.user
+#             instance.save()
+#             board = GroupsPosts.objects.filter(id=request.POST.get('board')).first()
+#             board.pins.add(pin)
+#     return redirect(request.META.get('HTTP_REFERER'))
+
 
 # def delete_post(request, id):
 #     # post_del = get_object_or_404(Post, pk=pk)
@@ -147,6 +189,7 @@ def create_post(request):
             # Get the current instance object to display in the template
             # img_obj = form_post.instance
             # return render(request, 'create_post.html', {'form': form_post, 'img_obj': img_obj})
+            return redirect('/')
     else:
         form_post = CreatePostForm()
 
@@ -232,7 +275,7 @@ def my_posts(request):
 
 @login_required
 def home_page_create(request):
-    group = GroupsPosts.objects.filter(user=request.user)
+    group = GroupsPosts.objects.filter(user=request.user).order_by('-id')
 
     context = {
         'group': group,

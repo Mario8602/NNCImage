@@ -1,7 +1,5 @@
 {% extends "base.html" %}
-
 {% load static %}
-
 {% block page_content %}
 
 <!--<head>-->
@@ -20,7 +18,7 @@
     {% for item in post %}
     {% if item.photo %}
     <div class="grid-item" href="#">
-        <a href="{{ item.get_absolute_url }}"><img src="{{ item.photo.url }}" width="300" alt="image"></a>
+        <a href="{{ item.get_absolute_url1 }}"><img src="{{ item.photo.url }}" width="300" alt="image"></a>
     </div>
     {% else %}
     <h1>NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</h1>
