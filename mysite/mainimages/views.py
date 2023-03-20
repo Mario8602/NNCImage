@@ -79,7 +79,7 @@ def post_selection(request, pk):
     comment_form = CommentForm()
     user = request.user
 
-    group = GroupsPosts.objects.filter(user=request.user).order_by('-id')
+    # group = GroupsPosts.objects.filter(user=request.user).order_by('-id')
 
     if request.method == 'POST':
         comment_form = CommentForm(data=request.POST)
@@ -97,7 +97,7 @@ def post_selection(request, pk):
         'comments': comments,
         'comment_form': comment_form,
         'posts': posts,
-        'group': group,
+        # 'group': group,
     }
 
     return render(request, "post_selection.html", context)
