@@ -1,2 +1,12 @@
+.idea/
 /venv/
 /media/
+locale/
+media/
+projectdata.json
+mysite/mainimages/__pycache__/
+mysite/mainimages/api/__pycache__/
+mysite/mainimages/migrations/__pycache__/
+mysite/mysite/__pycache__/
+mysite/players/__pycache__/
+mysite/players/migrations/__pycache__/
