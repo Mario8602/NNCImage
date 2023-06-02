@@ -1,25 +1,34 @@
-version: '3'
+version: '3.9'
+
 services:
-  web:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  db:
+    container_name: pg_db
+    image: postgres:14.8-alpine3.17
+    environment:
+      - POSTGRES_DB=my_db
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=admin
+    volumes: 
+      - ./postgres_data:/var/lib/postgresql/data/
     ports:
-      - "8000:8000"
+      - 5432:5432
+
+  test_pgadmin:
+    container_name: test_pgadmin1
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=noemail@noemail.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+    ports:
+      - "5050:80"
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - .:/code
+      - ./mysite:/code
+    ports:
+      - 8000:8000
     depends_on:
       - db
-    env_file:
-      - .env
-  db:
-    image: postgres
-    environment:
-      - POSTGRES_DB=${PSQL_DB}
-      - POSTGRES_USER=${PSQL_USER}
-      - POSTGRES_PASSWORD=${PSQL_PASSWORD}
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
-
-volumes:
-  postgres_data:
+    
