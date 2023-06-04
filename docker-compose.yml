@@ -4,25 +4,30 @@ services:
   db:
     container_name: pg_db
     image: postgres:14.8-alpine3.17
-    environment:
-      - POSTGRES_DB=my_db
-      - POSTGRES_PASSWORD=root
-      - POSTGRES_USER=admin
+    env_file:
+      - .env
+    # environment:
+    #   - POSTGRES_DB=POSTGRES_DB
+    #   - POSTGRES_PASSWORD=POSTGRES_PASSWORD
+    #   - POSTGRES_USER=POSTGRES_USER
     volumes: 
       - ./postgres_data:/var/lib/postgresql/data/
     ports:
       - 5432:5432
 
   test_pgadmin:
-    container_name: test_pgadmin1
+    container_name: pgadmin_nn
     image: dpage/pgadmin4
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=noemail@noemail.com
-      - PGADMIN_DEFAULT_PASSWORD=root
+    env_file:
+      - .env
+    # environment:
+    #   - PGADMIN_DEFAULT_EMAIL=PGADMIN_DEFAULT_EMAIL
+    #   - PGADMIN_DEFAULT_PASSWORD=PGADMIN_DEFAULT_PASSWORD
     ports:
       - "5050:80"
 
   web:
+    container_name: django_nn
     build: .
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
@@ -31,4 +36,25 @@ services:
       - 8000:8000
     depends_on:
       - db
-    
+
+  worker:
+    build:
+      context: .
+    hostname: worker
+    entrypoint: celery
+    command: -A celery_app.app worker --loglevel=info
+    volumes:
+      - ./mysite:/code
+    links:
+      - redis
+    depends_on:
+      - redis
+
+  redis:
+    container_name: redis_nn
+    restart: always
+    image: redis:7.0-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redisdata:/data
