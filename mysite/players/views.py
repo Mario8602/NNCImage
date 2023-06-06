@@ -15,45 +15,11 @@ from .models import CustomUser, ProfileUser
 from django.contrib.auth.decorators import login_required
 
 
-# def registration(request):
-#     if request.method == "POST":
-#         form = UserCreationForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, 'ВЫ УСПЕШНО ЗАРЕГИСТРИРОВНА')
-#         else:
-#             messages.error(request, 'Ошибка регистрации')
-#     else:
-#         form = UserCreationForm()
-#     return render(request, 'registration.html', {'form': form})
-
-
-# def registration(request):
-#
-#     MyUser = get_user_model()
-#
-#     if request.method == 'POST':
-#         username = request.POST.get('username')
-#         email = request.POST.get('email')
-#         password1 = request.POST.get('password')
-#         password2 = request.POST.get('Confirmed pass')
-#         new_user = MyUser.objects.create_user(username=username, email=email, password=password1)
-#         new_user.save()
-#         return render(request, 'registration.html', {'new_user': new_user})
-#     else:
-#         return render(request, 'registration.html')
-
-
 class SignUpView(CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'signup.html'
 
-
-# class UserLoginView(CreateView):
-#     template_name = 'login.html'
-#     form_class = UserLoginForm
-#     success_url = '/home/'
 
 def user_login(request):
     if request.method == "POST":
@@ -140,3 +106,8 @@ class ProfileUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('user_profile', kwargs={'pk': self.object.pk})
+    
+
+def test_celery(request):
+    # start task
+    return HttpResponse('Ищуу...')

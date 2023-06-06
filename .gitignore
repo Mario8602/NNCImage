@@ -11,3 +11,5 @@ mysite/players/migrations/__pycache__/
 mysite/projectdata.json
 postgres_data/
 venv/
+
+.env
