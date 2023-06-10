@@ -10,6 +10,7 @@ from django.views.generic.edit import CreateView, FormView, UpdateView
 
 from .forms import CustomUserCreationForm, UserLoginForm, UpdateUserForm, UpdateProfileForm, ProfileUpdateForm, ProfileCreateForm
 from .models import CustomUser, ProfileUser
+from .tasks import send_subscription
 # from mainimages.models import Post
 
 from django.contrib.auth.decorators import login_required
@@ -58,6 +59,14 @@ class ShowProfilePageView(DetailView):
         page_user = get_object_or_404(ProfileUser, id=self.kwargs['pk'])
         context['page_user'] = page_user
         return context
+    
+    def post(self, request, *args, **kwargs):
+        # print('iam not here')
+        # print(request.POST)
+        if 'subscription' in request.POST:
+            print('iam here')
+            send_subscription().delay()
+        return redirect(self.request.path) # self.request.path to='home'
 
 
 class CreateProfilePageView(CreateView):
@@ -108,6 +117,12 @@ class ProfileUpdateView(UpdateView):
         return reverse_lazy('user_profile', kwargs={'pk': self.object.pk})
     
 
-def test_celery(request):
-    # start task
-    return HttpResponse('Ищуу...')
+# def subscribe(request):
+#     if request.method == 'POST':
+#         # Обработка запроса на подписку
+
+#         # Получение email из запроса
+#         email = request.POST.get('email')
+#         print(email)
+#         # Запуск задачи Celery для отправки уведомления
+#         send_subscription.delay()

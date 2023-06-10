@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import SignUpView, user_login, user_profile, ShowProfilePageView, CreateProfilePageView, profile, ProfileUpdateView, test_celery
+from .views import SignUpView, user_login, user_profile, ShowProfilePageView, CreateProfilePageView, profile, ProfileUpdateView
 
 # app_name = 'players'
 
@@ -14,5 +14,5 @@ urlpatterns = [
     path('create_profile_page/', CreateProfilePageView.as_view(), name='create_user_profile'),
     path('profile_re/', profile, name='re_profile'),
     path('user_profile/<int:pk>/update', ProfileUpdateView.as_view(), name='update'),
-    path('test_celery/', test_celery)
+    # path('test_celery/', )
 ]

@@ -31,6 +31,12 @@
         <div class="col-md-2 pt-4 me-5 pb-5">
             <p class="text-black"><b>Public profile</b></p>
             <p class="text-black"><b>Account settings</b></p>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" name="subscription" class="text-black btn btn-link" style="padding: 0; margin: 0; border: none; background: none;">
+                    <b>Subscription</b>
+                </button>
+            </form>
         </div>
         <div class="col-md-8 ps-5 pe-5 pt-3 pb-5">
             <form method="post" enctype="multipart/form-data">

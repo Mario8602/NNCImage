@@ -1,11 +1,29 @@
-# import django
+# from dotenv import load_dotenv
+# import os
 
-# print(django.VERSION)
-from dotenv import load_dotenv
+# load_dotenv()
+
+# DJANGO_ALLOWED_HOSTS=os.getenv("ALLOWED_HOSTS").split(" ")
+
+# print(DJANGO_ALLOWED_HOSTS)
+
+import requests
 import os
+import time
 
-load_dotenv()
+# def random_photo():
+#     if not os.path.exists("task_date"):
+#         os.makedirs("task_date")
 
-DJANGO_ALLOWED_HOSTS=os.getenv("ALLOWED_HOSTS").split(" ")
+#     url = "https://cataas.com/cat"
 
-print(DJANGO_ALLOWED_HOSTS)
+#     response = requests.get(url)
+#     filename = f"task_date/date_{int(time.time())}.jpg"
+
+#     with open(filename, "wb") as file:
+#         file.write(response.content)
+
+#     print(f"Изображение сохранено как {filename}")
+
+# random_photo()
+
