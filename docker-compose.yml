@@ -54,6 +54,7 @@ services:
 
   redis:
     container_name: redis_nn
+    hostname: redis
     restart: always
     image: redis:7.0-alpine
     ports:

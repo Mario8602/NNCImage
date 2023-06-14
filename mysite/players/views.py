@@ -61,12 +61,9 @@ class ShowProfilePageView(DetailView):
         return context
     
     def post(self, request, *args, **kwargs):
-        # print('iam not here')
-        # print(request.POST)
         if 'subscription' in request.POST:
-            print('iam here')
-            send_subscription().delay()
-        return redirect(self.request.path) # self.request.path to='home'
+            send_subscription.delay()
+        return redirect(to='home') # self.request.path to='home'
 
 
 class CreateProfilePageView(CreateView):
@@ -115,14 +112,3 @@ class ProfileUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('user_profile', kwargs={'pk': self.object.pk})
-    
-
-# def subscribe(request):
-#     if request.method == 'POST':
-#         # Обработка запроса на подписку
-
-#         # Получение email из запроса
-#         email = request.POST.get('email')
-#         print(email)
-#         # Запуск задачи Celery для отправки уведомления
-#         send_subscription.delay()

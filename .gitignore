@@ -13,3 +13,5 @@ postgres_data/
 venv/
 
 .env
+mysite/test.py
+redisdata/

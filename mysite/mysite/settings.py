@@ -161,17 +161,26 @@ LOGOUT_REDIRECT_URL = 'home'
 # Celery settings
 
 # CELERY_TIMEZONE = "Europe/Moscow"
-CELERY_TASK_TRACK_STARTED = True
-CELERY_TASK_TIME_LIMIT = 30 * 60 
+# CELERY_TASK_TRACK_STARTED = True
+# CELERY_TASK_TIME_LIMIT = 30 * 60 
 
-CELERY_RESULT_BACKEND = 'django-db'
-CELERY_CACHE_BACKEND = 'django-cache'
+# CELERY_RESULT_BACKEND = 'django-db'
+# CELERY_CACHE_BACKEND = 'django-cache'
 
-CELERY_BROKER_URL = "redis://127.0.0.1:6379"
+CELERY_BROKER_URL = 'redis://localhost:6379/1'
 # CELERY_BROKER_URL = "redis://redis:6379"
-CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379"
+# CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379"
 
-# gmail
+# smtp
 
-SMTP_HOTS = 'smtp.gmail.com'
-SMTP_PORT = 465
+EMAIL_USE_TLS = True
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'hellp8901@gmail.com'
+EMAIL_HOST_PASSWORD = 'uydouxrihrkapryx'
+
+# EMAIL_HOST_PASSWORD = os.getenv('GMAIL_PASS')
+# EMAIL_HOST_USER = os.getenv('GMAIL_NAME')
