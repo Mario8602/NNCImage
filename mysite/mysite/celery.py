@@ -2,8 +2,12 @@ import os
 import time
 
 from celery import Celery
+from dotenv import load_dotenv
 from django.conf import settings
 from django.core.mail import send_mail
+
+
+load_dotenv()
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mysite.settings')
 
@@ -12,7 +16,6 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 
 app.conf.broker_url = settings.CELERY_BROKER_URL
 
-# Load task modules from all registered Django apps.
 app.autodiscover_tasks()
 
 
@@ -26,13 +29,12 @@ def debug_task():
 def send_subscription():
     subject = 'Подписка на рассылку'
     message = 'Вы успешно подписались на рассылку'
-    from_email = 'hellp8901@gmail.com'
-    to_email = 'hellp8901@yandex.ru'
+    from_email = os.getenv('FROM_EMAIL')
+    to_email = os.getenv('TO_EMAIL')
     send_mail(
-        subject, 
-        message, 
-        from_email, 
+        subject,
+        message,
+        from_email,
         [to_email],
         fail_silently=False
         )
-    print('alabaika')
