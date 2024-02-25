@@ -30,10 +30,6 @@ class Post(models.Model):
 class Category(models.Model):
     """ Категории постов """
     categories = models.CharField(max_length=20, db_index=True, verbose_name='Категории')
-    # slug = models.SlugField(max_length=250, db_index=True)
-    #
-    # def get_absolute_url(self):
-    #     return reverse('post_selection', args=[self.slug])
 
     def __str__(self):
         return f'{self.categories}'

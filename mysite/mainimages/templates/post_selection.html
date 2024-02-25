@@ -57,7 +57,6 @@
                 {% if user.is_authenticated %}
                 <div class="col-md-1">
                     <a class="save-btn link-dark rougi" href="{% url 'post_delete' post_one.id %}">Delete</a>
-<!--                    <button type="submit" class="save-btn text-black"><b>Save</b></button>-->
                 </div>
                 {% endif %}
 
@@ -143,14 +142,6 @@
 
     </div>
 </div>
-
-<!--<div class="grid">-->
-<!--    {% for item in posts1 %}-->
-<!--    <div class="grid-item" href="{% url 'pint_detail' item.id %}">-->
-<!--        <a href="{{ item.get_absolute_url }}"><img src="{{ item.photo.url }}" width="300px" alt="image"></a>-->
-<!--    </div>-->
-<!--    {% endfor %}-->
-<!--</div>-->
 
 {% endblock %}
 
