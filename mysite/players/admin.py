@@ -5,16 +5,6 @@ from django.contrib.auth.admin import UserAdmin
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import CustomUser, ProfileUser
 
-# from .models import MyUser
-#
-#
-# class MyUserAdmin(admin.ModelAdmin):
-#     list_display = ['email', 'username', "phone" ]
-#     search_fields = ('username',)
-#
-#
-# admin.site.register(MyUser, MyUserAdmin)
-
 
 class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm

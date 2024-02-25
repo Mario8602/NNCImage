@@ -1,5 +1,7 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
+from django.contrib.auth.forms import (UserCreationForm,
+                                       UserChangeForm,
+                                       AuthenticationForm)
 from django.forms import ModelForm
 
 from .models import CustomUser, ProfileUser
@@ -31,13 +33,6 @@ class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = CustomUser
         fields = ('username', 'email', 'phone')
-        # widgets = {
-        #     'username': forms.TextInput(),
-        #     'email': forms.EmailInput(attrs={'class': 'form-control'}),
-        #     'phone': forms.NumberInput(attrs={'class': 'form-control'}),
-        #     'password': forms.PasswordInput(attrs={'class': 'form-control'}),
-        #     'password1': forms.PasswordInput(attrs={'class': 'form-control'}),
-        # }
 
 
 class CustomUserChangeForm(UserChangeForm):
@@ -66,34 +61,6 @@ class UserLoginForm(AuthenticationForm):
         'class': 'form-control',
         'placeholder': 'Пароль'
     }))
-
-
-# class EditProfileForm(ModelForm):
-#     photo = forms.ImageField(required=False, widget=forms.FileInput)
-#     username = forms.CharField(widget=forms.TextInput)
-#
-#     class Meta:
-#         model = ProfileUser
-#         fields = ['photo', 'first_name', 'last_name', 'date_of_birth', 'website']
-#
-#     def __init__(self, *args, **kwargs):
-#         super(EditProfileForm, self).__init__(*args, **kwargs)
-#         for visible in self.visible_fields():
-#             if visible.name == 'website':
-#                 visible.field.widget.attrs['class'] = 'edit-profile-input form-control about-input'
-#             else:
-#                 visible.field.widget.attrs['class'] = 'edit-profile-input form-control rounded-pill'
-
-
-# class UserEditForm(forms.ModelForm):
-#     username = forms.CharField(required=True)
-#     email = forms.EmailField(required=True)
-#     first_name = forms.CharField(required=False)
-#     last_name = forms.CharField(required=False)
-#
-#     class Meta:
-#         model = User
-#         fields = ['first_name', 'last_name', 'username', 'email']
 
 
 class UpdateUserForm(forms.ModelForm):
@@ -183,7 +150,6 @@ class ProfileCreateForm(forms.ModelForm):
         'rows': 5,
         'placeholder': 'Введите информацию о себе'
     }))
-
 
     class Meta:
         model = ProfileUser
